@@ -1,0 +1,19 @@
+name: "Add Dummy Secret"
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: "0 13 * * 1"
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Make a file with fake secrets
+      run: |
+        echo "aws_access_key_id = AKIA2UC3YU48NJ90LMW3" > foobar.txt
+        echo "aws_secret_access_key = MM+2KsB7Vnh5gYWQz6C0uimn67ge/klipOmNwq34" >> foobar.txt
+    - uses: actions/upload-artifact@v4
+      with:
+        name: my-artifact
+        path: foobar.txt
+        compression-level: 9 # maximum compression
